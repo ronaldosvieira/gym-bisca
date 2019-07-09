@@ -25,10 +25,10 @@ class Rank(Enum):
     ACE = (11, 'A')
 
     def __int__(self):
-        return self[0]
+        return self.value[0]
 
     def __str__(self):
-        return self[1]
+        return self.value[1]
 
     def __lt__(self, other):
         return int(self) < int(other)
@@ -47,6 +47,9 @@ class Rank(Enum):
 
     def __ne__(self, other):
         return int(self) != int(other)
+
+    def __hash__(self):
+        return int(self)
 
 
 class Card:
