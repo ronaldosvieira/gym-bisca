@@ -26,9 +26,15 @@ class Rank(Enum):
     KING = 'K'
 
 
+class Card:
+    def __init__(self, rank, suit):
+        self.rank = rank
+        self.suit = suit
+
+
 class Deck:
     def __init__(self):
-        self.cards = [(suit, rank) for suit in Suit for rank in Rank]
+        self.cards = [Card(suit, rank) for suit in Suit for rank in Rank]
 
         self.shuffle()
 
