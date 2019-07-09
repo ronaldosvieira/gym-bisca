@@ -11,6 +11,12 @@ class Suit(Enum):
     CLUBS = '♣'
     SPADES = '♠'
 
+    def __str__(self):
+        return self.value
+
+    def __repr__(self):
+        return str(self)
+
 
 class Rank(Enum):
     TWO = (2, '2')
@@ -57,6 +63,9 @@ class Card:
         self.rank = rank
         self.suit = suit
 
+    def __repr__(self):
+        return str(self.rank) + str(self.suit)
+
 
 class EmptyDeckError(Exception):
     pass
@@ -64,7 +73,7 @@ class EmptyDeckError(Exception):
 
 class Deck:
     def __init__(self):
-        self.cards = [Card(suit, rank) for suit in Suit for rank in Rank]
+        self.cards = [Card(rank, suit) for suit in Suit for rank in Rank]
 
         self.shuffle()
 
