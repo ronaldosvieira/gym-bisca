@@ -14,17 +14,16 @@ class Suit(Enum):
 
 
 class Rank(Enum):
-    ONE = 1
-    TWO = 2
-    THREE = 3
-    FOUR = 4
-    FIVE = 5
-    SIX = 6
-    SEVEN = 7
-    JACK = 8
-    QUEEN = 9
-    KING = 10
-    ACE = 11
+    ACE = 'A'
+    TWO = '2'
+    THREE = '3'
+    FOUR = '4'
+    FIVE = '5'
+    SIX = '6'
+    SEVEN = '7'
+    JACK = 'J'
+    QUEEN = 'Q'
+    KING = 'K'
 
 
 class Deck:
