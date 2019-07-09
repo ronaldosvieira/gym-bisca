@@ -14,16 +14,40 @@ class Suit(Enum):
 
 
 class Rank(Enum):
-    ACE = 'A'
-    TWO = '2'
-    THREE = '3'
-    FOUR = '4'
-    FIVE = '5'
-    SIX = '6'
-    SEVEN = '7'
-    JACK = 'J'
-    QUEEN = 'Q'
-    KING = 'K'
+    TWO = (2, '2')
+    THREE = (3, '3')
+    FOUR = (4, '4')
+    FIVE = (5, '5')
+    SIX = (6, '6')
+    QUEEN = (7, 'Q')
+    JACK = (8, 'J')
+    KING = (9, 'K')
+    SEVEN = (10, '7')
+    ACE = (11, 'A')
+
+    def __int__(self):
+        return self[0]
+
+    def __str__(self):
+        return self[1]
+
+    def __lt__(self, other):
+        return int(self) < int(other)
+
+    def __le__(self, other):
+        return int(self) <= int(other)
+
+    def __eq__(self, other):
+        return int(self) == int(other)
+
+    def __ge__(self, other):
+        return int(self) >= int(other)
+
+    def __gt__(self, other):
+        return int(self) > int(other)
+
+    def __ne__(self, other):
+        return int(self) != int(other)
 
 
 class Card:
