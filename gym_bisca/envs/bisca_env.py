@@ -104,16 +104,16 @@ class Game:
         self.points = [0 for _ in range(self.players)]
         self.board = [None for _ in range(self.players)]
 
-        self.briscola = self.deck.draw()
-        self.deck.add_bottom(self.briscola)
+        self.trump = self.deck.draw()
+        self.deck.add_bottom(self.trump)
 
         for hand in self.hands:
             for _ in range(3):
                 drawn_card = self.deck.draw()
 
                 if drawn_card.rank == Rank.TWO \
-                        and drawn_card.suit == self.briscola.suit:
-                    self.briscola, drawn_card = drawn_card, self.briscola
+                        and drawn_card.suit == self.trump.suit:
+                    self.trump, drawn_card = drawn_card, self.trump
 
                 hand.append(drawn_card)
 
@@ -147,8 +147,8 @@ class Game:
 
                     if self.turn <= 3 \
                             and drawn_card.rank == Rank.TWO \
-                            and drawn_card.suit == self.briscola.suit:
-                        self.briscola, drawn_card = drawn_card, self.briscola
+                            and drawn_card.suit == self.trump.suit:
+                        self.trump, drawn_card = drawn_card, self.trump
 
                     hand.append(drawn_card)
             except EmptyDeckError:
@@ -169,7 +169,7 @@ class Game:
         lead_card = self.board[self.lead_player]
 
         briscolas = list(filter(
-            lambda c: c[1].suit == self.briscola.suit,
+            lambda c: c[1].suit == self.trump.suit,
             enumerate(self.board)))
         same_suit = list(filter(
             lambda c: c[1].suit == lead_card.suit,
@@ -183,12 +183,28 @@ class Game:
             return self.lead_player
 
 
-class BiscolaSelfPlayEnv(gym.Env):
+class GameState:
+    def __init__(self, deck, hands, board, points, briscola, active_player):
+        self.deck = deck
+        self.hands = hands
+        self.board = board
+        self.points = points
+        self.briscola = briscola
+        self.active_player = active_player
+
+
+class BiscaSelfPlayEnv(gym.Env):
+    def __init__(self):
+        self.game = Game()
+
+    def reset(self):
+        self.game = Game()
+
     def step(self, action):
         pass
 
-    def reset(self):
+    def render(self, mode='human'):
         pass
 
-    def render(self, mode='human'):
+    def _get_game_state(self):
         pass
