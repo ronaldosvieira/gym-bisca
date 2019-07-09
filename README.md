@@ -1,2 +1,2 @@
-# gym-briscola
-OpenAI Gym environment for the Briscola card game
+# gym-bisca
+OpenAI Gym environment for the Bisca card game
