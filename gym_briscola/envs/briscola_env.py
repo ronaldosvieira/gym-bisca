@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 import gym
 import numpy as np
 
@@ -56,6 +55,10 @@ class Card:
         self.suit = suit
 
 
+class EmptyDeckError(Exception):
+    pass
+
+
 class Deck:
     def __init__(self):
         self.cards = [Card(suit, rank) for suit in Suit for rank in Rank]
@@ -65,8 +68,11 @@ class Deck:
     def shuffle(self):
         np.random.shuffle(self.cards)
 
-    def draw(self, amount=1):
-        return self.cards.pop(amount)
+    def draw(self):
+        try:
+            return self.cards.pop()
+        except IndexError:
+            raise EmptyDeckError
 
 
 class BiscolaSelfPlayEnv(gym.Env):
