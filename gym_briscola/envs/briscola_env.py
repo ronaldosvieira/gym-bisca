@@ -109,7 +109,7 @@ class Game:
 
         self.turn = 0
         self.lead_player = np.random.randint(self.players)
-        self.active_player = 0
+        self.active_player = self.lead_player
 
     def step(self, action):
         card = self.hands[self.active_player].pop(action)
