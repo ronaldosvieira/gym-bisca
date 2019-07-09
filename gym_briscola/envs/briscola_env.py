@@ -39,7 +39,7 @@ class Deck:
         return self.cards.pop(amount)
 
 
-class BiscolaEnv(gym.Env):
+class BiscolaSelfPlayEnv(gym.Env):
     def step(self, action):
         pass
 

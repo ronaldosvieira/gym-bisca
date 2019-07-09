@@ -1,1 +1,1 @@
-from gym_briscola.envs.briscola_env import BiscolaEnv
+from gym_briscola.envs.briscola_env import BiscolaSelfPlayEnv
