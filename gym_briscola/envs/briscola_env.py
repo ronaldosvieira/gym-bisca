@@ -86,6 +86,9 @@ class Deck:
         except IndexError:
             raise EmptyDeckError
 
+    def add_bottom(self, card):
+        self.cards = [card] + self.cards
+
 
 class Game:
     def __init__(self):
@@ -102,6 +105,7 @@ class Game:
         self.board = [None for _ in range(self.players)]
 
         self.briscola = self.deck.draw()
+        self.deck.add_bottom(self.briscola)
 
         for hand in self.hands:
             for _ in range(3):
