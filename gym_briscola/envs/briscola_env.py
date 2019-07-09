@@ -27,6 +27,19 @@ class Rank(Enum):
     ACE = 11
 
 
+class Deck:
+    def __init__(self):
+        self.cards = [(suit, rank) for suit in Suit for rank in Rank]
+
+        self.shuffle()
+
+    def shuffle(self):
+        np.random.shuffle(self.cards)
+
+    def draw(self, amount=1):
+        return self.cards.pop(amount)
+
+
 class BiscolaEnv(gym.Env):
     def step(self, action):
         pass
