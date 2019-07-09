@@ -101,11 +101,17 @@ class Game:
         self.points = [0 for _ in range(self.players)]
         self.board = [None for _ in range(self.players)]
 
+        self.briscola = self.deck.draw()
+
         for hand in self.hands:
             for _ in range(3):
-                hand.append(self.deck.draw())
+                drawn_card = self.deck.draw()
 
-        self.briscola = self.deck.draw()
+                if drawn_card.rank == Rank.TWO \
+                        and drawn_card.suit == self.briscola.suit:
+                    self.briscola, drawn_card = drawn_card, self.briscola
+
+                hand.append(drawn_card)
 
         self.turn = 0
         self.lead_player = np.random.randint(self.players)
@@ -133,7 +139,14 @@ class Game:
                     new_cards.append(self.deck.draw())
 
                 for hand in self.hands:
-                    hand.append(new_cards.pop())
+                    drawn_card = new_cards.pop()
+
+                    if self.turn <= 3 \
+                            and drawn_card.rank == Rank.TWO \
+                            and drawn_card.suit == self.briscola.suit:
+                        self.briscola, drawn_card = drawn_card, self.briscola
+
+                    hand.append(drawn_card)
             except EmptyDeckError:
                 pass
 
